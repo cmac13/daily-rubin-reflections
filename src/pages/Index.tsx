@@ -1,8 +1,14 @@
 
 import QuoteDisplay from "../components/QuoteDisplay";
+import Navigation from "../components/Navigation";
 
 const Index = () => {
-  return <QuoteDisplay />;
+  return (
+    <>
+      <Navigation />
+      <QuoteDisplay />
+    </>
+  );
 };
 
 export default Index;
