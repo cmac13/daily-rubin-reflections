@@ -91,8 +91,8 @@ const QuoteDisplay = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between px-4 py-12 bg-[#E8E6E1]">
-      <div className="w-full max-w-3xl mx-auto flex flex-col items-center">
+    <div className="min-h-screen flex items-center justify-center bg-[#E8E6E1]">
+      <div className="w-full max-w-3xl mx-auto px-4 py-12 flex flex-col items-center justify-center">
         {/* Book cover inspired circle */}
         <div className="mb-16 relative w-24 h-24">
           <div className="absolute inset-0 border-2 border-black rounded-full" />
