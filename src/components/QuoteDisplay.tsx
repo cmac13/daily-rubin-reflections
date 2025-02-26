@@ -77,7 +77,6 @@ const QuoteDisplay = () => {
   };
 
   const shareToInstagram = () => {
-    // Instagram doesn't support direct sharing via web, so we'll open the app
     toast.info("Opening Instagram. Copy and paste the quote to share!", {
       duration: 4000,
     });
@@ -85,7 +84,6 @@ const QuoteDisplay = () => {
   };
 
   const shareToTikTok = () => {
-    // TikTok doesn't support direct sharing via web, so we'll open the app
     toast.info("Opening TikTok. Copy and paste the quote to share!", {
       duration: 4000,
     });
@@ -93,8 +91,14 @@ const QuoteDisplay = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="max-w-3xl w-full">
+    <div className="min-h-screen flex flex-col items-center justify-between px-4 py-12 bg-[#E8E6E1]">
+      <div className="w-full max-w-3xl mx-auto flex flex-col items-center">
+        {/* Book cover inspired circle */}
+        <div className="mb-16 relative w-24 h-24">
+          <div className="absolute inset-0 border-2 border-black rounded-full" />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-black rounded-full" />
+        </div>
+
         <AnimatePresence mode="wait">
           <motion.div
             key={currentQuoteIndex}
@@ -102,13 +106,13 @@ const QuoteDisplay = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="flex flex-col items-center text-center space-y-8"
+            className="flex flex-col items-center text-center space-y-8 max-w-2xl"
           >
             <div className="flex flex-col items-center space-y-2">
-              <span className="text-warm-500 font-sans text-sm tracking-wide uppercase">
+              <span className="text-warm-500 font-sans text-sm tracking-widest uppercase">
                 Daily Wisdom
               </span>
-              <h1 className="text-4xl md:text-5xl font-serif font-light text-warm-900 leading-tight">
+              <h1 className="text-3xl md:text-4xl font-serif font-light text-warm-900 leading-relaxed">
                 {quotes[currentQuoteIndex].text}
               </h1>
             </div>
@@ -122,12 +126,12 @@ const QuoteDisplay = () => {
               </span>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 pt-8">
               <button
                 onClick={nextQuote}
                 disabled={isAnimating}
-                className="group flex items-center space-x-2 px-6 py-3 bg-warm-50 border border-warm-200 rounded-full 
-                         text-warm-700 hover:bg-warm-100 transition-all duration-300 
+                className="group flex items-center space-x-2 px-6 py-3 bg-white/50 border border-black/10 rounded-full 
+                         text-warm-900 hover:bg-white/70 transition-all duration-300 
                          disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="font-sans text-sm">Next Quote</span>
@@ -135,8 +139,8 @@ const QuoteDisplay = () => {
               </button>
 
               <DropdownMenu>
-                <DropdownMenuTrigger className="group flex items-center space-x-2 px-6 py-3 bg-warm-50 border border-warm-200 rounded-full 
-                                              text-warm-700 hover:bg-warm-100 transition-all duration-300">
+                <DropdownMenuTrigger className="group flex items-center space-x-2 px-6 py-3 bg-white/50 border border-black/10 rounded-full 
+                                              text-warm-900 hover:bg-white/70 transition-all duration-300">
                   <span className="font-sans text-sm">Share</span>
                   <Share2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 </DropdownMenuTrigger>
