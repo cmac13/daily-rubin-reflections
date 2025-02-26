@@ -57,7 +57,7 @@ const QuoteActions = ({
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4 pt-8 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
+    <div className="flex flex-col items-center space-y-4 pt-8 w-full sm:flex-row sm:items-center sm:justify-center sm:space-y-0 sm:space-x-4">
       <button
         onClick={onNextQuote}
         disabled={isAnimating}
@@ -69,7 +69,7 @@ const QuoteActions = ({
         <ArrowRight className="w-4 h-4 group-hover:transform group-hover:translate-x-1 transition-transform" />
       </button>
 
-      <div className="flex items-center justify-center space-x-4 w-full sm:w-auto">
+      <div className="flex items-center justify-center space-x-4">
         <button
           onClick={onToggleLike}
           className="group flex items-center space-x-2 px-6 py-3 bg-white/50 border border-black/10 rounded-full 
@@ -118,4 +118,3 @@ const QuoteActions = ({
 };
 
 export default QuoteActions;
-
