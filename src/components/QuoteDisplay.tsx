@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Share2, Twitter, Instagram, Copy } from "lucide-react";
+import { ArrowRight, Share2, Twitter, Instagram, Copy, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import {
   DropdownMenu,
@@ -168,6 +168,17 @@ const QuoteDisplay = () => {
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* Purchase link */}
+        <a
+          href="https://www.penguinrandomhouse.com/books/717356/the-creative-act-by-rick-rubin/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-16 group flex items-center space-x-2 text-warm-600 hover:text-warm-900 transition-colors"
+        >
+          <span className="text-sm">Get the book</span>
+          <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform" />
+        </a>
       </div>
     </div>
   );
