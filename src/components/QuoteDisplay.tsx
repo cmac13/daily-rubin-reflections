@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Share2, Twitter, Instagram, Copy, ExternalLink, Heart } from "lucide-react";
+import { ArrowRight, Share2, Twitter, Instagram, Copy, ExternalLink, Heart, BookOpen } from "lucide-react";
 import { toast } from "sonner";
 import {
   DropdownMenu,
@@ -60,11 +59,18 @@ const QuoteDisplay = () => {
   const [quotesState, setQuotesState] = useState<Quote[]>(quotes);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
+
+  const chapters = Array.from(new Set(quotesState.map(quote => quote.chapter)));
+
+  const filteredQuotes = selectedChapter
+    ? quotesState.filter(quote => quote.chapter === selectedChapter)
+    : quotesState;
 
   const nextQuote = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setCurrentQuoteIndex((prev) => (prev + 1) % quotesState.length);
+    setCurrentQuoteIndex((prev) => (prev + 1) % filteredQuotes.length);
     setTimeout(() => setIsAnimating(false), 500);
   };
 
@@ -83,7 +89,7 @@ const QuoteDisplay = () => {
   };
 
   const getShareText = () => {
-    const quote = quotesState[currentQuoteIndex];
+    const quote = filteredQuotes[currentQuoteIndex];
     return `"${quote.text}"\n\n- From "${quote.chapter}", page ${quote.page}\nThe Creative Act by Rick Rubin`;
   };
 
@@ -117,15 +123,36 @@ const QuoteDisplay = () => {
     window.location.href = "tiktok://";
   };
 
-  const currentQuote = quotesState[currentQuoteIndex];
+  const currentQuote = filteredQuotes[currentQuoteIndex];
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#E8E6E1]">
       <div className="w-full max-w-3xl mx-auto px-4 py-12 flex flex-col items-center justify-center">
-        {/* Book cover inspired circle */}
         <div className="mb-16 relative w-24 h-24">
           <div className="absolute inset-0 border-2 border-black rounded-full" />
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-black rounded-full" />
+        </div>
+
+        <div className="mb-8 flex items-center space-x-4">
+          <BookOpen className="w-4 h-4 text-warm-600" />
+          <DropdownMenu>
+            <DropdownMenuTrigger className="px-4 py-2 text-sm text-warm-600 hover:text-warm-900 transition-colors">
+              {selectedChapter || "All Chapters"}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onClick={() => setSelectedChapter(null)}>
+                All Chapters
+              </DropdownMenuItem>
+              {chapters.map((chapter) => (
+                <DropdownMenuItem
+                  key={chapter}
+                  onClick={() => setSelectedChapter(chapter)}
+                >
+                  {chapter}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         <AnimatePresence mode="wait">
@@ -215,7 +242,6 @@ const QuoteDisplay = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Purchase link */}
         <a
           href="https://www.penguinrandomhouse.com/books/717356/the-creative-act-by-rick-rubin/"
           target="_blank"
@@ -231,4 +257,3 @@ const QuoteDisplay = () => {
 };
 
 export default QuoteDisplay;
-
