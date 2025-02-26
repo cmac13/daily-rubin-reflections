@@ -1,7 +1,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Share2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface Quote {
   text: string;
@@ -48,6 +49,37 @@ const QuoteDisplay = () => {
     setTimeout(() => setIsAnimating(false), 500);
   };
 
+  const shareQuote = async () => {
+    const quote = quotes[currentQuoteIndex];
+    const shareText = `"${quote.text}"\n\n- From "${quote.chapter}", page ${quote.page}\nThe Creative Act by Rick Rubin`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          text: shareText,
+        });
+        toast.success("Thanks for sharing!");
+      } catch (error) {
+        if ((error as Error).name !== "AbortError") {
+          copyToClipboard(shareText);
+        }
+      }
+    } else {
+      copyToClipboard(shareText);
+    }
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        toast.success("Quote copied to clipboard!");
+      },
+      () => {
+        toast.error("Failed to copy quote");
+      }
+    );
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
       <div className="max-w-3xl w-full">
@@ -78,16 +110,27 @@ const QuoteDisplay = () => {
               </span>
             </div>
 
-            <button
-              onClick={nextQuote}
-              disabled={isAnimating}
-              className="group flex items-center space-x-2 px-6 py-3 bg-warm-50 border border-warm-200 rounded-full 
-                       text-warm-700 hover:bg-warm-100 transition-all duration-300 
-                       disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <span className="font-sans text-sm">Next Quote</span>
-              <ArrowRight className="w-4 h-4 group-hover:transform group-hover:translate-x-1 transition-transform" />
-            </button>
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={nextQuote}
+                disabled={isAnimating}
+                className="group flex items-center space-x-2 px-6 py-3 bg-warm-50 border border-warm-200 rounded-full 
+                         text-warm-700 hover:bg-warm-100 transition-all duration-300 
+                         disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span className="font-sans text-sm">Next Quote</span>
+                <ArrowRight className="w-4 h-4 group-hover:transform group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <button
+                onClick={shareQuote}
+                className="group flex items-center space-x-2 px-6 py-3 bg-warm-50 border border-warm-200 rounded-full 
+                         text-warm-700 hover:bg-warm-100 transition-all duration-300"
+              >
+                <span className="font-sans text-sm">Share</span>
+                <Share2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </button>
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
