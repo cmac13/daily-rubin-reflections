@@ -1,11 +1,16 @@
 
+import { lazy, Suspense } from "react";
 import QuoteDisplay from "../components/QuoteDisplay";
-import Navigation from "../components/Navigation";
+
+// Lazy load the Navigation component
+const Navigation = lazy(() => import("../components/Navigation"));
 
 const Index = () => {
   return (
     <>
-      <Navigation />
+      <Suspense fallback={<div className="h-16 bg-[#E8E6E1]"></div>}>
+        <Navigation />
+      </Suspense>
       <QuoteDisplay />
     </>
   );

@@ -7,7 +7,8 @@ export interface Quote {
   isLiked?: boolean;
 }
 
-export const quotes: Quote[] = [
+// Base array of quotes
+const baseQuotes: Quote[] = [
   {
     text: "The goal is to be as present as possible in the making and allow the result to be what it wants to be.",
     chapter: "On Creating",
@@ -359,3 +360,6 @@ export const quotes: Quote[] = [
     isLiked: false,
   }
 ];
+
+// Make a shallow copy for exports
+export const quotes: Quote[] = [...baseQuotes];

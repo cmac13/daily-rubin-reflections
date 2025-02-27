@@ -1,12 +1,14 @@
 
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Quote, quotes } from "@/types/quote";
 import BookCircle from "./BookCircle";
 import ChapterSelector from "./ChapterSelector";
 import QuoteActions from "./QuoteActions";
-import PurchaseLink from "./PurchaseLink";
 import { toast } from "sonner";
+
+// Lazy loaded component
+const PurchaseLink = lazy(() => import("./PurchaseLink"));
 
 const QuoteDisplay = () => {
   const [quotesState, setQuotesState] = useState<Quote[]>(quotes);
@@ -30,18 +32,24 @@ const QuoteDisplay = () => {
   const toggleLike = () => {
     setQuotesState((prevQuotes) => {
       const newQuotes = [...prevQuotes];
-      const currentQuote = newQuotes[currentQuoteIndex];
-      currentQuote.isLiked = !currentQuote.isLiked;
-      currentQuote.likes = currentQuote.isLiked ? (currentQuote.likes || 0) + 1 : (currentQuote.likes || 0) - 1;
-      
-      const message = currentQuote.isLiked ? "Quote added to favorites!" : "Quote removed from favorites";
-      toast.success(message);
-      
+      const quoteIndex = newQuotes.findIndex(q => q.text === filteredQuotes[currentQuoteIndex].text);
+      if (quoteIndex !== -1) {
+        const currentQuote = newQuotes[quoteIndex];
+        currentQuote.isLiked = !currentQuote.isLiked;
+        currentQuote.likes = currentQuote.isLiked ? (currentQuote.likes || 0) + 1 : (currentQuote.likes || 0) - 1;
+        
+        const message = currentQuote.isLiked ? "Quote added to favorites!" : "Quote removed from favorites";
+        toast.success(message);
+      }
       return newQuotes;
     });
   };
 
   const currentQuote = filteredQuotes[currentQuoteIndex];
+  
+  if (!currentQuote) {
+    return <div className="min-h-screen flex items-center justify-center bg-[#E8E6E1]">Loading quotes...</div>;
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#E8E6E1]">
@@ -90,11 +98,12 @@ const QuoteDisplay = () => {
           </motion.div>
         </AnimatePresence>
 
-        <PurchaseLink />
+        <Suspense fallback={<div className="mt-8 text-sm text-warm-500">Loading...</div>}>
+          <PurchaseLink />
+        </Suspense>
       </div>
     </div>
   );
 };
 
 export default QuoteDisplay;
-
