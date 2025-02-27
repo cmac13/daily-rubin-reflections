@@ -15,10 +15,12 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useState } from "react";
+import Discography from "./Discography";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showVideos, setShowVideos] = useState(false);
+  const [showDiscography, setShowDiscography] = useState(false);
 
   const menuItems = [
     {
@@ -32,9 +34,9 @@ const Navigation = () => {
       label: "Podcasts",
     },
     {
-      href: "https://en.wikipedia.org/wiki/Rick_Rubin_production_discography",
       icon: <DiscAlbum className="w-4 h-4" />,
       label: "Discography",
+      action: () => setShowDiscography(true),
     },
   ];
 
@@ -135,6 +137,11 @@ const Navigation = () => {
             ))}
           </div>
         </DialogContent>
+      </Dialog>
+
+      {/* Discography Dialog */}
+      <Dialog open={showDiscography} onOpenChange={setShowDiscography}>
+        <Discography />
       </Dialog>
 
       {/* Mobile Menu */}
