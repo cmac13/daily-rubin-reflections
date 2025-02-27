@@ -131,10 +131,6 @@ const QuoteDisplay = () => {
         <Suspense fallback={<div className="mt-8 text-sm text-warm-500">Loading...</div>}>
           <PurchaseLink />
         </Suspense>
-
-        <div className="mt-8 text-xs text-warm-400">
-          {quotesState.length} of {totalQuotes} quotes loaded
-        </div>
       </div>
     </div>
   );
