@@ -1,0 +1,132 @@
+
+import { Quote } from "../quote";
+
+// Third chunk of quotes (remaining quotes)
+export const quotesChunk3: Quote[] = [
+  {
+    text: "Intuition often speaks in whispers. We must learn to listen closely.",
+    chapter: "Intuition",
+    page: 66,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Rest is not a luxury for the creative process—it's a necessity.",
+    chapter: "Rest",
+    page: 143,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "What we create matters less than who we become through the act of creating.",
+    chapter: "Transformation",
+    page: 173,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The mysterious is as important as the obvious in any work of art.",
+    chapter: "Mystery",
+    page: 119,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Structure provides the foundation that allows freedom to flourish.",
+    chapter: "Structure",
+    page: 108,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Inspiration is a visitor, not a resident. We must be ready when it arrives.",
+    chapter: "Inspiration",
+    page: 81,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The artist's way is to transform the mundane into the extraordinary.",
+    chapter: "Perception",
+    page: 49,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "True change happens when we step outside our comfortable patterns.",
+    chapter: "Change",
+    page: 136,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "We don't need more time. We need more presence in the time we have.",
+    chapter: "Time",
+    page: 159,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Rhythm is the heartbeat of creativity.",
+    chapter: "Rhythm",
+    page: 102,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Every project goes through a messy middle. Trust the process.",
+    chapter: "The Middle",
+    page: 131,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The seeds of your best work are often planted in the soil of discomfort.",
+    chapter: "Discomfort",
+    page: 113,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "When we remove ourselves from the center of our work, we make room for something larger.",
+    chapter: "Ego",
+    page: 148,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The courage to create is the courage to let go of certainty.",
+    chapter: "Courage",
+    page: 87,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The questions we ask determine the answers we find.",
+    chapter: "Curiosity",
+    page: 56,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Enthusiasm is the fuel for sustained creative endeavors.",
+    chapter: "Enthusiasm",
+    page: 93,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The tools we use shape what we make in subtle but important ways.",
+    chapter: "Tools",
+    page: 122,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The path of the artist is to follow fascination, not expectation.",
+    chapter: "Fascination",
+    page: 71,
+    likes: 0,
+    isLiked: false,
+  }
+];
