@@ -11,14 +11,13 @@ import { toast } from "sonner";
 const PurchaseLink = lazy(() => import("./PurchaseLink"));
 
 const QuoteDisplay = () => {
-  // Start with only the first 5 quotes from initialQuotes
+  // Start with just 5 quotes
   const [quotesState, setQuotesState] = useState<Quote[]>(() => initialQuotes.slice(0, 5));
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const [loadedChunks, setLoadedChunks] = useState<number[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [isInitialLoadComplete, setIsInitialLoadComplete] = useState(false);
 
   const chapters = Array.from(new Set(quotesState.map(quote => quote.chapter)));
 
@@ -26,101 +25,61 @@ const QuoteDisplay = () => {
     ? quotesState.filter(quote => quote.chapter === selectedChapter)
     : quotesState;
 
-  // Function to load the remaining quotes from chunk 1 and other chunks
-  const loadRemainingQuotes = async () => {
-    if (!isInitialLoadComplete && !isLoadingMore) {
+  // Function to load more quotes only when explicitly needed (like reaching the end)
+  const loadMoreQuotes = async () => {
+    if (isLoadingMore) return;
+    
+    // Only load more if we're near the end of our current quotes
+    const remainingQuotes = filteredQuotes.length - (currentQuoteIndex + 1);
+    
+    if (remainingQuotes < 3) {
       setIsLoadingMore(true);
       
       try {
-        // First, load the remaining quotes from chunk 1
-        const remainingFirstChunk = initialQuotes.slice(5);
-        
-        // Update state with the remaining quotes from chunk 1
-        setQuotesState(prev => [...prev, ...remainingFirstChunk]);
-        setLoadedChunks(prev => [...prev, 1]);
-        
-        // Mark initial load as complete
-        setIsInitialLoadComplete(true);
-        
-        // Now load chunk 2 in the background after a slight delay
-        setTimeout(async () => {
-          try {
-            const chunk2 = await loadQuoteChunk(2);
-            setQuotesState(prev => [...prev, ...chunk2]);
-            setLoadedChunks(prev => [...prev, 2]);
-            
-            // Load chunk 3 after another delay
-            setTimeout(async () => {
-              try {
-                const chunk3 = await loadQuoteChunk(3);
-                setQuotesState(prev => [...prev, ...chunk3]);
-                setLoadedChunks(prev => [...prev, 3]);
-              } catch (error) {
-                console.error("Failed to load chunk 3:", error);
-              }
-            }, 2000);
-            
-          } catch (error) {
-            console.error("Failed to load chunk 2:", error);
-          }
-        }, 1000);
-        
+        // First check if we need to load the rest of chunk 1
+        if (!loadedChunks.includes(1)) {
+          const remainingFirstChunk = initialQuotes.slice(5);
+          setQuotesState(prev => [...prev, ...remainingFirstChunk]);
+          setLoadedChunks(prev => [...prev, 1]);
+          toast.success("Loaded more quotes");
+        } 
+        // Then try to load chunk 2 if needed
+        else if (!loadedChunks.includes(2)) {
+          const chunk2 = await loadQuoteChunk(2);
+          setQuotesState(prev => [...prev, ...chunk2]);
+          setLoadedChunks(prev => [...prev, 2]);
+          toast.success("Loaded more quotes");
+        }
+        // Finally try chunk 3 if needed
+        else if (!loadedChunks.includes(3)) {
+          const chunk3 = await loadQuoteChunk(3);
+          setQuotesState(prev => [...prev, ...chunk3]);
+          setLoadedChunks(prev => [...prev, 3]);
+          toast.success("Loaded more quotes");
+        }
       } catch (error) {
-        console.error("Failed to load remaining quotes:", error);
+        console.error("Failed to load more quotes:", error);
+        toast.error("Failed to load more quotes");
       } finally {
         setIsLoadingMore(false);
       }
     }
   };
 
-  // Function to load more quotes if needed during navigation
-  const loadMoreQuotes = async () => {
-    // If we're approaching the end of our loaded quotes, ensure all chunks are loaded
-    const remainingQuotes = quotesState.length - (currentQuoteIndex + 1);
-    const shouldLoadMore = remainingQuotes < 5 && loadedChunks.length < totalChunks;
-    
-    if (shouldLoadMore && !isLoadingMore) {
-      setIsLoadingMore(true);
-      
-      // Determine which chunk to load next
-      const chunksToLoad = [];
-      for (let i = 1; i <= totalChunks; i++) {
-        if (!loadedChunks.includes(i)) {
-          chunksToLoad.push(i);
-        }
-      }
-      
-      if (chunksToLoad.length > 0) {
-        try {
-          const nextChunkNumber = chunksToLoad[0];
-          const newQuotes = await loadQuoteChunk(nextChunkNumber);
-          setQuotesState(prev => [...prev, ...newQuotes]);
-          setLoadedChunks(prev => [...prev, nextChunkNumber]);
-        } catch (error) {
-          console.error("Failed to load more quotes:", error);
-        } finally {
-          setIsLoadingMore(false);
-        }
-      } else {
-        setIsLoadingMore(false);
-      }
-    }
-  };
-
-  // Start loading the remaining quotes immediately after mounting
-  useEffect(() => {
-    loadRemainingQuotes();
-  }, []);
-
-  // Load more quotes when needed during navigation
-  useEffect(() => {
-    loadMoreQuotes();
-  }, [currentQuoteIndex]);
-
   const nextQuote = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setCurrentQuoteIndex((prev) => (prev + 1) % filteredQuotes.length);
+    
+    // If we're at the last quote, go back to the first one
+    if (currentQuoteIndex === filteredQuotes.length - 1) {
+      setCurrentQuoteIndex(0);
+    } else {
+      setCurrentQuoteIndex(prev => prev + 1);
+    }
+    
+    // Check if we need to load more quotes
+    loadMoreQuotes();
+    
     setTimeout(() => setIsAnimating(false), 500);
   };
 
