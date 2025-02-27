@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Film } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 type VideosDialogProps = {
   isOpen: boolean;
@@ -16,40 +16,36 @@ const VideosDialog = ({ isOpen, onOpenChange }: VideosDialogProps) => {
   const videos = [
     {
       title: "Rick Rubin on The Creative Act",
-      embedId: "C1U5UY3k9j8",
+      youtubeUrl: "https://www.youtube.com/watch?v=C1U5UY3k9j8",
     },
     {
       title: "Rick Rubin Interview with Anderson Cooper",
-      embedId: "H_1XJH8J6jk",
+      youtubeUrl: "https://www.youtube.com/watch?v=H_1XJH8J6jk",
     },
     {
       title: "Rick Rubin on Creativity, Authenticity and Flow",
-      embedId: "ucFq0SK35O0",
+      youtubeUrl: "https://www.youtube.com/watch?v=ucFq0SK35O0",
     },
   ];
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[800px] bg-[#E8E6E1]">
+      <DialogContent className="sm:max-w-[600px] bg-[#E8E6E1]">
         <DialogHeader>
           <DialogTitle className="text-center font-serif text-2xl text-warm-900">Rick Rubin Videos</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-6">
+        <div className="grid gap-4">
           {videos.map((video) => (
-            <div key={video.embedId} className="space-y-2">
-              <h3 className="font-medium text-warm-900">{video.title}</h3>
-              <div className="relative pb-[56.25%] h-0">
-                <iframe
-                  className="absolute top-0 left-0 w-full h-full rounded-lg"
-                  width="560"
-                  height="315"
-                  src={`https://www.youtube.com/embed/${video.embedId}`}
-                  title={video.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
+            <a 
+              key={video.youtubeUrl}
+              href={video.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 bg-white/70 rounded-lg hover:bg-white transition-colors"
+            >
+              <span className="font-medium text-warm-900">{video.title}</span>
+              <ExternalLink className="h-5 w-5 text-warm-600" />
+            </a>
           ))}
         </div>
       </DialogContent>
