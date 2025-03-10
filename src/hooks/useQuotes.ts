@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Quote, initialQuotes, loadQuoteChunk, totalChunks } from "@/types/quote";
 import { toast } from "sonner";
 
@@ -11,6 +10,7 @@ export const useQuotes = () => {
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const [loadedChunks, setLoadedChunks] = useState<number[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [viewedQuoteIds, setViewedQuoteIds] = useState<Set<string>>(new Set());
 
   const chapters = Array.from(new Set(quotesState.map(quote => quote.chapter)));
 
@@ -18,14 +18,30 @@ export const useQuotes = () => {
     ? quotesState.filter(quote => quote.chapter === selectedChapter)
     : quotesState;
 
+  // Create a unique ID for a quote to track which ones we've seen
+  const getQuoteId = useCallback((quote: Quote): string => {
+    return `${quote.text.substring(0, 20)}-${quote.page}`;
+  }, []);
+
+  // Add current quote to viewed set
+  useEffect(() => {
+    if (filteredQuotes.length > 0 && currentQuoteIndex >= 0 && currentQuoteIndex < filteredQuotes.length) {
+      const quoteId = getQuoteId(filteredQuotes[currentQuoteIndex]);
+      setViewedQuoteIds(prev => new Set(prev).add(quoteId));
+    }
+  }, [currentQuoteIndex, filteredQuotes, getQuoteId]);
+
   // Function to load more quotes only when explicitly needed (like reaching the end)
   const loadMoreQuotes = async () => {
     if (isLoadingMore) return;
     
-    // Only load more if we're near the end of our current quotes
-    const remainingQuotes = filteredQuotes.length - (currentQuoteIndex + 1);
+    // Calculate how many quotes we haven't viewed yet
+    const unseenQuotes = filteredQuotes.filter(quote => 
+      !viewedQuoteIds.has(getQuoteId(quote))
+    ).length;
     
-    if (remainingQuotes < 3) {
+    // If we've seen most quotes, load more
+    if (unseenQuotes < 3) {
       setIsLoadingMore(true);
       
       try {
@@ -59,16 +75,30 @@ export const useQuotes = () => {
     }
   };
 
+  // Get a random quote that we haven't seen recently, if possible
+  const getRandomQuoteIndex = (): number => {
+    // If we have seen all quotes, pick any random one
+    if (viewedQuoteIds.size >= filteredQuotes.length) {
+      return Math.floor(Math.random() * filteredQuotes.length);
+    }
+    
+    // Otherwise try to find one we haven't seen yet
+    const unseenIndices = filteredQuotes
+      .map((quote, index) => ({ quote, index }))
+      .filter(({ quote }) => !viewedQuoteIds.has(getQuoteId(quote)))
+      .map(({ index }) => index);
+    
+    // Pick a random unseen quote
+    return unseenIndices[Math.floor(Math.random() * unseenIndices.length)];
+  };
+
   const nextQuote = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     
-    // If we're at the last quote, go back to the first one
-    if (currentQuoteIndex === filteredQuotes.length - 1) {
-      setCurrentQuoteIndex(0);
-    } else {
-      setCurrentQuoteIndex(prev => prev + 1);
-    }
+    // Get a random quote index
+    const randomIndex = getRandomQuoteIndex();
+    setCurrentQuoteIndex(randomIndex);
     
     // Check if we need to load more quotes
     loadMoreQuotes();
