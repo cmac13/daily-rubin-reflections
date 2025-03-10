@@ -2,7 +2,6 @@
 import { Film, Podcast, DiscAlbum } from "lucide-react";
 import { useState } from "react";
 import AboutDialog from "./AboutDialog";
-import PodcastsDialog from "./PodcastsDialog";
 import MobileMenu from "./MobileMenu";
 import Discography from "./Discography";
 import { Dialog } from "@/components/ui/dialog";
@@ -10,7 +9,6 @@ import { MenuItem } from "../types/navigation";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showPodcasts, setShowPodcasts] = useState(false);
   const [showDiscography, setShowDiscography] = useState(false);
 
   const menuItems: MenuItem[] = [
@@ -22,7 +20,7 @@ const Navigation = () => {
     {
       icon: <Podcast className="w-4 h-4" />,
       label: "Podcasts",
-      action: () => setShowPodcasts(true),
+      href: "https://podcasts.apple.com/us/search?term=rick%20rubin",
     },
     {
       icon: <DiscAlbum className="w-4 h-4" />,
@@ -62,7 +60,6 @@ const Navigation = () => {
       </div>
 
       {/* Dialogs */}
-      <PodcastsDialog isOpen={showPodcasts} onOpenChange={setShowPodcasts} />
       <Dialog open={showDiscography} onOpenChange={setShowDiscography}>
         <Discography />
       </Dialog>
