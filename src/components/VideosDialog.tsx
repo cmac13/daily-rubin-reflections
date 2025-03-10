@@ -16,16 +16,16 @@ type VideosDialogProps = {
 const VideosDialog = ({ isOpen, onOpenChange }: VideosDialogProps) => {
   const videos = [
     {
-      title: "Rick Rubin on The Creative Act",
-      youtubeUrl: "https://www.youtube.com/watch?v=H0I2PKiZDkQ",
+      title: "Rick Rubin on Creativity and Creative Process",
+      youtubeUrl: "https://www.youtube.com/watch?v=l9W3KXKFS80",
     },
     {
-      title: "Rick Rubin Interview with Anderson Cooper",
-      youtubeUrl: "https://www.youtube.com/watch?v=19o6dJXSZKA",
+      title: "Rick Rubin and Malcolm Gladwell",
+      youtubeUrl: "https://www.youtube.com/watch?v=HZoQLqWca_A",
     },
     {
-      title: "Rick Rubin on Creativity, Authenticity and Flow",
-      youtubeUrl: "https://www.youtube.com/watch?v=6klnH60RnkQ",
+      title: "Rick Rubin Explains His Creative Process",
+      youtubeUrl: "https://www.youtube.com/watch?v=5qz0k_k_CiM",
     },
   ];
 
