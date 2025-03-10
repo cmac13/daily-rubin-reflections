@@ -34,24 +34,32 @@ const QuoteActions = ({
     }
   };
 
-  const shareToX = () => {
+  const shareToX = async () => {
+    // First copy to clipboard
+    await copyToClipboard();
+    
+    // Then open X
     const text = encodeURIComponent(getShareText());
     window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
-    toast.success("Opening X (Twitter)...");
+    toast.success("Opening X (Twitter) with quote copied to clipboard");
   };
 
-  const shareToInstagram = () => {
-    toast.info("Opening Instagram. Copy and paste the quote to share!", {
-      duration: 4000,
-    });
+  const shareToInstagram = async () => {
+    // First copy to clipboard
+    await copyToClipboard();
+    
+    // Then open Instagram
     window.location.href = "instagram://";
+    toast.success("Quote copied to clipboard for Instagram");
   };
 
-  const shareToTikTok = () => {
-    toast.info("Opening TikTok. Copy and paste the quote to share!", {
-      duration: 4000,
-    });
+  const shareToTikTok = async () => {
+    // First copy to clipboard
+    await copyToClipboard();
+    
+    // Then open TikTok
     window.location.href = "tiktok://";
+    toast.success("Quote copied to clipboard for TikTok");
   };
 
   return (
