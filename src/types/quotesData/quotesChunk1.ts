@@ -1,7 +1,6 @@
-
 import { Quote } from "../quote";
 
-// First chunk of quotes (16 quotes)
+// First chunk of quotes (30 quotes)
 export const quotesChunk1: Quote[] = [
   {
     text: "The goal is to be as present as possible in the making and allow the result to be what it wants to be.",
@@ -112,6 +111,104 @@ export const quotesChunk1: Quote[] = [
     text: "Play is not the opposite of work. At its best, work is play.",
     chapter: "Play",
     page: 73,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "True artistic growth means embracing your unique voice rather than chasing trends.",
+    chapter: "Artistic Growth",
+    page: 112,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The most original work often comes from synthesizing seemingly disparate influences.",
+    chapter: "Originality",
+    page: 135,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Creative blocks aren't failures; they're invitations to approach your work differently.",
+    chapter: "Creative Blocks",
+    page: 150,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "What makes your work unique is not what you include, but what you have the courage to exclude.",
+    chapter: "Editing",
+    page: 124,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The distance between where you are and where you want to be is filled by consistent daily practice.",
+    chapter: "Practice",
+    page: 47,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The quality of your attention determines the quality of your work.",
+    chapter: "Attention",
+    page: 39,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Sometimes your best work emerges from what initially felt like failure.",
+    chapter: "Failure",
+    page: 129,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Great art doesn't have to explain itself; it simply has to exist.",
+    chapter: "Artistic Expression",
+    page: 84,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Vulnerability in your work is not weakness; it's the source of its power.",
+    chapter: "Vulnerability",
+    page: 101,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The essence of creativity is seeing ordinary things with extraordinary vision.",
+    chapter: "Vision",
+    page: 56,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Your creative practice should be a sanctuary, not another source of stress.",
+    chapter: "Practice",
+    page: 48,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Constraints aren't limitations; they're the boundaries that give your work form.",
+    chapter: "Constraints",
+    page: 112,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Asking better questions leads to better creative solutions than having all the answers.",
+    chapter: "Questions",
+    page: 77,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The goal isn't perfection; it's authenticity.",
+    chapter: "Authenticity",
+    page: 98,
     likes: 0,
     isLiked: false,
   }

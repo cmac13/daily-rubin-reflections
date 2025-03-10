@@ -1,7 +1,6 @@
-
 import { Quote } from "../quote";
 
-// Third chunk of quotes (remaining quotes)
+// Third chunk of quotes (35 quotes)
 export const quotesChunk3: Quote[] = [
   {
     text: "Intuition often speaks in whispers. We must learn to listen closely.",
@@ -126,6 +125,125 @@ export const quotesChunk3: Quote[] = [
     text: "The path of the artist is to follow fascination, not expectation.",
     chapter: "Fascination",
     page: 71,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Creativity expands when you remove expectations of how things 'should' be.",
+    chapter: "Expectations",
+    page: 127,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Revision is not fixing mistakes; it's discovering what your work truly wants to be.",
+    chapter: "Revision",
+    page: 144,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Your creative voice strengthens when you use it regularly.",
+    chapter: "Practice",
+    page: 46,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Learning when to walk away is as important as knowing when to persist.",
+    chapter: "Discernment",
+    page: 133,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The more specific and personal your work, the more universal its appeal.",
+    chapter: "Specificity",
+    page: 91,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Find the place where your enthusiasm and the world's needs intersect.",
+    chapter: "Purpose",
+    page: 163,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The magic happens outside your comfort zone, but not so far that you're paralyzed by fear.",
+    chapter: "Growth Zone",
+    page: 118,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Making meaningful work requires you to be both vulnerable and resilient.",
+    chapter: "Resilience",
+    page: 156,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "When you're stuck, change the question you're asking.",
+    chapter: "Problem Solving",
+    page: 105,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Consistency matters more than intensity in creative work.",
+    chapter: "Consistency",
+    page: 68,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Your enthusiasm for the work will translate to the audience's enthusiasm for experiencing it.",
+    chapter: "Enthusiasm",
+    page: 95,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The world doesn't need more perfect work; it needs more authentic work.",
+    chapter: "Authenticity",
+    page: 99,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Cultivate a beginner's mind even as you develop expertise.",
+    chapter: "Beginner's Mind",
+    page: 43,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Restriction is often the mother of creativity.",
+    chapter: "Constraints",
+    page: 113,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "The role of the artist is to pay attention and report back.",
+    chapter: "Observation",
+    page: 54,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Ideas need space and silence to germinate.",
+    chapter: "Incubation",
+    page: 82,
+    likes: 0,
+    isLiked: false,
+  },
+  {
+    text: "Your creative voice is the sum of all your experiences, filtered through your unique perspective.",
+    chapter: "Voice",
+    page: 137,
     likes: 0,
     isLiked: false,
   }
