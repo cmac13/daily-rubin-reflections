@@ -2,6 +2,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -16,15 +17,15 @@ const VideosDialog = ({ isOpen, onOpenChange }: VideosDialogProps) => {
   const videos = [
     {
       title: "Rick Rubin on The Creative Act",
-      youtubeUrl: "https://www.youtube.com/watch?v=C1U5UY3k9j8",
+      youtubeUrl: "https://www.youtube.com/watch?v=H0I2PKiZDkQ",
     },
     {
       title: "Rick Rubin Interview with Anderson Cooper",
-      youtubeUrl: "https://www.youtube.com/watch?v=H_1XJH8J6jk",
+      youtubeUrl: "https://www.youtube.com/watch?v=19o6dJXSZKA",
     },
     {
       title: "Rick Rubin on Creativity, Authenticity and Flow",
-      youtubeUrl: "https://www.youtube.com/watch?v=ucFq0SK35O0",
+      youtubeUrl: "https://www.youtube.com/watch?v=6klnH60RnkQ",
     },
   ];
 
@@ -33,6 +34,9 @@ const VideosDialog = ({ isOpen, onOpenChange }: VideosDialogProps) => {
       <DialogContent className="sm:max-w-[600px] bg-[#E8E6E1]">
         <DialogHeader>
           <DialogTitle className="text-center font-serif text-2xl text-warm-900">Rick Rubin Videos</DialogTitle>
+          <DialogDescription className="text-center text-warm-600">
+            Watch interviews with Rick Rubin about creativity and his work
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4">
           {videos.map((video) => (
