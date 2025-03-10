@@ -5,6 +5,7 @@ import BookCircle from "./BookCircle";
 import ChapterSelector from "./ChapterSelector";
 import QuoteActions from "./QuoteActions";
 import CurrentQuote from "./CurrentQuote";
+import DonationLink from "./DonationLink";
 import { useQuotes } from "@/hooks/useQuotes";
 
 // Lazy loaded component
@@ -48,6 +49,8 @@ const QuoteDisplay = () => {
           onNextQuote={nextQuote}
           isAnimating={isAnimating}
         />
+
+        <DonationLink />
 
         <Suspense fallback={<div className="mt-8 text-sm text-warm-500">Loading...</div>}>
           <PurchaseLink />
