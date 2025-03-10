@@ -18,7 +18,6 @@ const QuoteDisplay = () => {
     chapters,
     selectedChapter,
     nextQuote,
-    toggleLike,
     setSelectedChapter
   } = useQuotes();
   
@@ -47,7 +46,6 @@ const QuoteDisplay = () => {
         <QuoteActions
           quote={currentQuote}
           onNextQuote={nextQuote}
-          onToggleLike={toggleLike}
           isAnimating={isAnimating}
         />
 

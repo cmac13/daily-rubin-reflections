@@ -3,8 +3,6 @@ export interface Quote {
   text: string;
   chapter: string;
   page: number;
-  likes?: number;
-  isLiked?: boolean;
 }
 
 // Import individual quote chunk files

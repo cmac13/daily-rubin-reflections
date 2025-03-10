@@ -106,22 +106,6 @@ export const useQuotes = () => {
     setTimeout(() => setIsAnimating(false), 500);
   };
 
-  const toggleLike = () => {
-    setQuotesState((prevQuotes) => {
-      const newQuotes = [...prevQuotes];
-      const quoteIndex = newQuotes.findIndex(q => q.text === filteredQuotes[currentQuoteIndex].text);
-      if (quoteIndex !== -1) {
-        const currentQuote = newQuotes[quoteIndex];
-        currentQuote.isLiked = !currentQuote.isLiked;
-        currentQuote.likes = currentQuote.isLiked ? (currentQuote.likes || 0) + 1 : (currentQuote.likes || 0) - 1;
-        
-        const message = currentQuote.isLiked ? "Quote added to favorites!" : "Quote removed from favorites";
-        toast.success(message);
-      }
-      return newQuotes;
-    });
-  };
-
   return {
     quotesState,
     currentQuoteIndex,
@@ -130,7 +114,6 @@ export const useQuotes = () => {
     filteredQuotes,
     chapters,
     nextQuote,
-    toggleLike,
     setSelectedChapter,
     currentQuote: filteredQuotes[currentQuoteIndex]
   };
